@@ -25,7 +25,7 @@ exports.handler = async (event) => {
 
     // 1) Branded thank-you to the parent
     await send(from, email, 'We have received your interest | Across the Bridge',
-      confirmHtml_(d, camp, process.env.LOGO_URL), orgs[0],
+      confirmHtml_(d, camp, process.env.LOGO_URL || 'https://acrossthebridge.co.ke/logo.png'), orgs[0],
       'Hello ' + d.parent + ', thank you for your interest in Across the Bridge for ' + d.child + ' (' + camp + '). We have received your details and will be in touch with upcoming programme information. Call or WhatsApp +254 714 285 694. Across the Bridge');
 
     // 2) Notification to you
@@ -45,13 +45,13 @@ function esc_(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, functio
 function confirmHtml_(d, camp, logoUrl) {
   var navy = '#1c3f7c', orange = '#e8661a', sun = '#f7a21b', sand = '#fff7ea';
   var head = logoUrl
-    ? '<img src="' + esc_(logoUrl) + '" alt="Across the Bridge" width="150" style="display:block;margin:0 auto 10px;background:#fff;border-radius:12px;padding:6px">'
+    ? '<img src="' + esc_(logoUrl) + '" alt="Across the Bridge" width="200" style="display:block;margin:0 auto;background:#fff;border-radius:14px;padding:8px;max-width:100%;height:auto">'
     : '<div style="font:800 28px Georgia,serif;color:#fff">Across the Bridge</div>';
   var row = function (k, v) { return '<tr><td style="padding:4px 12px 4px 0;color:#4d5d69">' + k + '</td><td style="padding:4px 0;font-weight:bold;color:' + navy + '">' + esc_(v) + '</td></tr>'; };
   return '<div style="background:' + sand + ';padding:24px 12px;font-family:Arial,Helvetica,sans-serif">' +
     '<table role="presentation" width="100%" style="max-width:600px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden" cellpadding="0" cellspacing="0">' +
     '<tr><td style="background:' + navy + ';padding:28px 24px;text-align:center">' + head +
-      '<div style="color:#cfe0f5;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-top:4px">Mentorship School &middot; Unlocking Potential</div></td></tr>' +
+      (logoUrl ? '' : '<div style="color:#cfe0f5;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-top:4px">Mentorship School &middot; Unlocking Potential</div>') + '</td></tr>' +
     '<tr><td style="height:6px;background:' + sun + '"></td></tr>' +
     '<tr><td style="padding:32px 28px;color:#1d2b36;font-size:16px;line-height:1.6">' +
       '<h1 style="margin:0 0 14px;font:bold 24px Georgia,serif;color:' + navy + '">Thank you, ' + esc_(d.parent) + '!</h1>' +
@@ -62,8 +62,13 @@ function confirmHtml_(d, camp, logoUrl) {
         row('Child', d.child) + row('Age', d.age) + row('Interested in', camp) + row('Phone', d.phone) + '</table>' +
       '<p style="margin:0 0 6px">Questions? Reply to this email, or reach us here:</p>' +
       '<p style="margin:0;font-size:15px">Phone / WhatsApp: <a href="tel:+254714285694" style="color:' + navy + '">+254 714 285 694</a><br>' +
-        'Email: <a href="mailto:acrossthebridge25@gmail.com" style="color:' + navy + '">acrossthebridge25@gmail.com</a></p>' +
+        'Email: <a href="mailto:info@acrossthebridge.co.ke" style="color:' + navy + '">info@acrossthebridge.co.ke</a></p>' +
       '<p style="margin:22px 0 0">Warm regards,<br><b style="color:' + navy + '">The Across the Bridge team</b></p>' +
+    '</td></tr>' +
+    '<tr><td style="background:#f3ead8;padding:16px 24px;text-align:center;font-size:12px;color:#4d5d69">' +
+      'Across the Bridge Mentorship School &middot; P.O. Box 4008-30200, Kitale, Kenya<br>You received this because someone submitted an interest form on our website using this email address.</td></tr>' +
+    '</table></div>';
+}
     '</td></tr>' +
     '<tr><td style="background:#f3ead8;padding:16px 24px;text-align:center;font-size:12px;color:#4d5d69">' +
       'Across the Bridge Mentorship School &middot; P.O. Box 4008-30200, Kitale, Kenya<br>You received this because someone submitted an interest form on our website using this email address.</td></tr>' +
