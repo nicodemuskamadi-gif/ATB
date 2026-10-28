@@ -69,8 +69,3 @@ function confirmHtml_(d, camp, logoUrl) {
       'Across the Bridge Mentorship School &middot; P.O. Box 4008-30200, Kitale, Kenya<br>You received this because someone submitted an interest form on our website using this email address.</td></tr>' +
     '</table></div>';
 }
-    '</td></tr>' +
-    '<tr><td style="background:#f3ead8;padding:16px 24px;text-align:center;font-size:12px;color:#4d5d69">' +
-      'Across the Bridge Mentorship School &middot; P.O. Box 4008-30200, Kitale, Kenya<br>You received this because someone submitted an interest form on our website using this email address.</td></tr>' +
-    '</table></div>';
-}
